@@ -2,5 +2,6 @@
 Lib
 Scripts
 pyvenv.cfg
+# created by Zane for his dev env
 .vscode
 ava-config.conf

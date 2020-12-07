@@ -23,6 +23,18 @@ def speak(text):
     # Blocking method! Process all queued TTS commands
     engine.runAndWait()
 
+def checkInternetConnectivity():
+    """
+    Check if you're connected to the internet
+    Returns True if connected, False if anything else
+    """
+    import requests
+    try:
+        requests.get("http://google.com")
+        return True
+    except:
+        return False
+
 def takeUserVoiceIn():
     """
     Get users voice and processes it
@@ -43,8 +55,10 @@ def takeUserVoiceIn():
         try:
             print("Proccessing...")
 
-            question = recog.recognize_wit(audio, str(config.get('SR', 'key')), False)
-
+            if checkInternetConnectivity():
+                question = recog.recognize_wit(audio, str(config.get('SR', 'key')), False)
+            else:
+                question = recog.recognize_sphinx(audio, "en-US", None, None, None)
         except Exception as e:
             print(e)
             return "None"
