@@ -29,24 +29,25 @@ def takeUserVoiceIn():
     """
     # Set up recognizer and source
     recog = sr.Recognizer()
-    source = sr.Microphone()
 
     recog.dynamic_energy_threshold = True
 
     recog.pause_threshold = 0.8
-    audio = recog.listen(source) # Blocking?
 
-    # Start listening for data
-    print("Listening...")
+    with sr.Microphone() as source:
+        audio = recog.listen(source) # Blocking?
 
-    try:
-        print("Proccessing...")
+        # Start listening for data
+        print("Listening...")
 
-        question = recog.recognize_wit(audio, str(config.get('SR', 'key')), False)
+        try:
+            print("Proccessing...")
 
-    except Exception as e:
-        print(e)
-        return "None"
+            question = recog.recognize_wit(audio, str(config.get('SR', 'key')), False)
+
+        except Exception as e:
+            print(e)
+            return "None"
     
     return question
 
