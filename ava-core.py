@@ -1,6 +1,9 @@
 import pyttsx3
 import speech_recognition as sr
+import configparser
 
+config = configparser.ConfigParser()
+config.readfp(open(r'ava-config.conf'))
 
 def speak(text):
     """
@@ -39,7 +42,7 @@ def takeUserVoiceIn():
     try:
         print("Proccessing...")
 
-        question = recog.recognize_wit(audio, "HZGX4AIGUWXQTIEOCP5ZGF6SVRNAKOBJ", False)
+        question = recog.recognize_wit(audio, str(config.get('SR', 'key')), False)
 
     except Exception as e:
         print(e)
