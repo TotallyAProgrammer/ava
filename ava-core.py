@@ -73,7 +73,13 @@ def voice_commands():
     """
     while True:
         query = takeUserVoiceIn().lower()
-        print(query)
+        if query == "None":
+            print(query)
+            pass
+        else:
+            print(query)
+            #speak(query)
+            pass
 
 if __name__ == '__main__':
     # Run voice_commands
