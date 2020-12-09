@@ -1,7 +1,10 @@
 import pyttsx3
 import speech_recognition as sr
-import configparser
 
+from ava_cmds import *
+
+# Read AVA's Configuration
+import configparser
 config = configparser.ConfigParser()
 config.readfp(open(r'ava-config.conf'))
 
@@ -20,6 +23,7 @@ def speak(text):
     engine.say(text)
 
     # TODO Find and use a none blocking method so that commands can be cancelled
+    # TODO Find a way to chose blocking and non-blocking based on circumstances. (Programmer choice? Automatic Choice?)
     # Blocking method! Process all queued TTS commands
     engine.runAndWait()
 
