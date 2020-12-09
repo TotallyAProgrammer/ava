@@ -1,5 +1,9 @@
 # created by virtualenv automatically
 Lib
+lib
+bin
+local
+share
 Scripts
 pyvenv.cfg
 # created by Zane for his dev env
