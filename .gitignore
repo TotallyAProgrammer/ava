@@ -1,6 +1,7 @@
 # created by virtualenv automatically
 Lib
 lib
+lib64
 bin
 local
 share
