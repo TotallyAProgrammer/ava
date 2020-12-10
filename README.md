@@ -8,7 +8,7 @@ I am choosing to make my own to decrease the tracking done on me and my data.
 
 ### Development
 
-Due to AVA being ever-evolving it is _highly_ reccomended that you work in a virtual environment.
+Due to AVA being ever-evolving it is _highly_ reccomended that you work in a python virtual environment (venv).
 AVA has been tested to function with Python 3.6.8 and above, it is strongly reccomended to work with the latest python version regardless.
 AVA has only been tested to function with the versions of the used libraries listed in the requirements.txt, but it should work in newer versions of them too.
 
