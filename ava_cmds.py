@@ -1,3 +1,8 @@
+"""
+AVA's primary commands file
+Located here are all of AVA's core commands
+"""
+
 def speak(text=None):
     """
     The voice of AVA
@@ -16,11 +21,12 @@ def speak(text=None):
     engine.say(text)
 
     # TODO Find and use a none blocking method so that commands can be cancelled
-    # TODO Find a way to chose blocking and non-blocking based on circumstances. (Programmer choice? Automatic Choice?)
+    # TODO Find a way to chose blocking and non-blocking based on circumstances.
+    #      (Programmer choice? Automatic Choice?)
     # Blocking method! Process all queued TTS commands
     engine.runAndWait()
 
-def checkInternetConnectivity():
+def check_internet_connectivity():
     """
     Check if you're connected to the internet
     Returns True if connected, False if anything else
@@ -29,11 +35,11 @@ def checkInternetConnectivity():
     try:
         requests.get("http://google.com")
         return True
-    except:
+    except requests.ConnectionError:
         return False
 
 def questions(question=None):
     """
     docstring
     """
-    pass
+    print(question)

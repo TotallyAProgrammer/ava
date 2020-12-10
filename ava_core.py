@@ -1,15 +1,16 @@
+import configparser
+from ava_cmds import speak, questions, check_internet_connectivity
 import speech_recognition as sr
 
-from ava_cmds import *
-
 # Read AVA's Configuration
-import configparser
 config = configparser.ConfigParser()
 config.readfp(open(r'ava-config.conf'))
 
+
+
 # Functions Start
 
-def takeUserVoiceIn():
+def take_user_voice_in():
     """
     Get users voice and processes it
     """
@@ -29,15 +30,14 @@ def takeUserVoiceIn():
         try:
             print("Proccessing...")
 
-            if checkInternetConnectivity():
+            if check_internet_connectivity():
                 question = recog.recognize_wit(audio, str(config.get('SR', 'key')), False)
             else:
                 question = recog.recognize_sphinx(audio, "en-US", None, None, None)
-        except Exception as e:
-            print(e)
-            speak(e)
+        except Exception as exep:
+            print(exep)
+            speak(exep)
             return "None"
-    
     return question
 
 
@@ -47,14 +47,14 @@ def voice_commands():
     Process commands
     """
     while True:
-        query = takeUserVoiceIn().lower()
+        query = take_user_voice_in().lower()
         if query == "None":
-            print(query)
+            #print(query)
             pass
         else:
             print(query)
+            questions(query)
             #speak(query)
-            pass
 
 if __name__ == '__main__':
     # Run voice_commands
