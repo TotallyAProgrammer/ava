@@ -2,6 +2,7 @@ beautifulsoup4==4.9.3
 certifi==2020.12.5
 chardet==3.0.4
 idna==2.10
+pocketsphinx==0.1.15
 pyttsx3==2.90
 requests==2.25.0
 soupsieve==2.0.1

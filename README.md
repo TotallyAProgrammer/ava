@@ -15,17 +15,19 @@ AVA has only been tested to function with the versions of the used libraries lis
 ### Requirements
 
 AVA Relies on the following versions (or higher) for full functionality:
+Many of these are dependencies.
 
+- pyttsx3 2.90 (Not fully functional other than Windows)
+- SpeechRecognition 3.8.1
+- pocketsphinx 0.1.15
+- wikipedia 1.4.0
 - beautifulsoup4 4.9.3
 - certifi 2020.12.5
 - chardet 3.0.4
 - idna 2.10
-- pyttsx3 2.90 (Not fully functional other than Windows)
 - requests 2.25.0
 - soupsieve 2.0.1
-- SpeechRecognition 3.8.1
 - urllib3 1.26.2
-- wikipedia 1.4.0
 
 ### Known Possible Issues
 
