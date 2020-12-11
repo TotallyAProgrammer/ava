@@ -17,7 +17,7 @@ AVA has only been tested to function with the versions of the used libraries lis
 AVA Relies on the following versions (or higher) for full functionality:
 Many of these are dependencies.
 
-- pyttsx3 2.90 (Not fully functional other than Windows)
+- pyttsx3 2.90
 - SpeechRecognition 3.8.1
 - pocketsphinx 0.1.15
 - wikipedia 1.4.0
@@ -28,6 +28,9 @@ Many of these are dependencies.
 - requests 2.25.0
 - soupsieve 2.0.1
 - urllib3 1.26.2
+
+__Note on pyttsx3 and eSpeak-NG__
+In order to use eSpeak-NG as your TTS engine, you may have to build from source, as a release with support may not have been released yet.
 
 ### Known Possible Issues
 
