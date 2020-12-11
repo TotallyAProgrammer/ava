@@ -21,6 +21,7 @@ Many of these are dependencies.
 - SpeechRecognition 3.8.1
 - pocketsphinx 0.1.15
 - wikipedia 1.4.0
+- pyaudio 0.2.11
 - beautifulsoup4 4.9.3
 - certifi 2020.12.5
 - chardet 3.0.4
