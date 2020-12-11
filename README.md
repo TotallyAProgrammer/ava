@@ -42,4 +42,4 @@ In order to use eSpeak-NG as your TTS engine, you may have to build from source,
   - swig
   - gcc
   - python3x-devel (Where x is your version)
-- Currently AVA doesn't run on well on linux due to pyttsx3 2.90 and prior not having espeak-ng support built in (This will be fixed with PR #163)
+- Currently AVA doesn't run on well on linux due to pyttsx3 2.90 and prior not having espeak-ng support built in (This is fixed with PR #163)
