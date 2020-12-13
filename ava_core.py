@@ -1,46 +1,5 @@
-import configparser
-from ava_cmds import speak, questions, check_internet_connectivity
-import speech_recognition as sr
 
-# Read AVA's Configuration
-config = configparser.ConfigParser()
-config.readfp(open(r'ava-config.conf'))
-
-
-
-# Functions Start
-
-def take_user_voice_in():
-    """
-    Get users voice and processes it
-    """
-    # Set up recognizer and source
-    recog = sr.Recognizer()
-
-    recog.dynamic_energy_threshold = True
-
-    recog.pause_threshold = 0.8
-
-    with sr.Microphone() as source:
-        audio = recog.listen(source) # Blocking?
-
-        # Start listening for data
-        print("Listening...")
-
-        try:
-            print("Proccessing...")
-
-            if check_internet_connectivity():
-                question = recog.recognize_wit(audio, str(config.get('SR', 'key')), False)
-            else:
-                question = recog.recognize_sphinx(audio, "en-US", None, None, None)
-        except Exception as exep:
-            print(exep)
-            speak(exep)
-            return "None"
-    return question
-
-
+from ava_cmds import speak, questions, take_user_voice_in
 
 def voice_commands():
     """
