@@ -23,7 +23,7 @@ def read_verbal_command(t_phrase): # Make async?
     with open('c_v_cmds_db.json', 'r') as input:
         data = json.load(input)
         for trigger in data['trigger']:
-        if str(t_phrase) == str(trigger):
-            return data['original']
-        else:
-            return False
+            if str(t_phrase) == str(trigger):
+                return data['original']
+            else:
+                return False
