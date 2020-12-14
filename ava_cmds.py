@@ -42,6 +42,17 @@ def take_user_voice_in():
             return "None"
     return question
 
+def take_valid_input_in():
+    """
+    Waits for a valid user voice input
+    """
+    truth = True
+    while truth == True:
+        voice = take_user_voice_in()
+        if voice is not None:
+            truth = False
+            return voice
+
 def speak(text=None):
     """
     The voice of AVA
@@ -84,35 +95,23 @@ def questions(question=None):
     question = question.lower()
     if question in {"ava add trigger", "hey add trigger", "eva add trigger"}:
         speak("Okay. What is the trigger phrase?")
-        t_phrase = None
-        truth = True
-        while truth == True:
-            t_phrase = take_user_voice_in()
-            if t_phrase is not None:
-                truth = False
+        t_phrase = take_valid_input_in()
         # speak(t_phrase)
         speak("Okay. What is the original command?")
-        truth = True
-        while truth == True:
-            orig_cmd = take_user_voice_in()
-            if orig_cmd is not None:
-                truth = False
+        orig_cmd = take_valid_input_in()
         # speak(orig_cmd)
         speak("The new trigger command is: " + t_phrase + ", for the command " + orig_cmd + ". Is this correct?")
-        truth = True
-        while truth == True:
-            answer = take_user_voice_in()
-            if answer is not None:
-                if answer.lower() in {"yes", "yeah", "yep", "yup", "okay"}:
-                    speak("Writing to persistent database")
-                    try:
-                        write_verbal_command(t_phrase, orig_cmd)
-                        speak("Write successful")
-                        return True
-                    except:
-                        speak("Unable to write to file")
-                        return False
-                else:
-                    speak("Cancelling operation")
-                    return False
+        answer = take_valid_input_in()
+        if answer.lower() in {"yes", "yeah", "yep", "yup", "okay", "ok"}:
+            speak("Writing to persistent database")
+            try:
+                write_verbal_command(t_phrase, orig_cmd)
+                speak("Write successful")
+                return True
+            except:
+                speak("Unable to write to file")
+                return False
+        else:
+            speak("Cancelling operation")
+            return False
     print(question)

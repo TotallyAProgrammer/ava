@@ -1,1 +1,4 @@
-#intentionally left empty for now
+"""
+Functions to slim down command code size
+"""
+
