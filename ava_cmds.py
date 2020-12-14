@@ -82,7 +82,6 @@ def questions(question=None):
     docstring
     """
     question = question.lower()
-    # TODO "AVA, add the phrase <PHRASE> to the question <QUESTION>""
     if question in {"ava add trigger", "hey add trigger", "eva add trigger"}:
         speak("Okay. What is the trigger phrase?")
         t_phrase = None
