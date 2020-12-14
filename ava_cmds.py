@@ -1,6 +1,7 @@
 import configparser
 import speech_recognition as sr
 from v_programmer import write_verbal_command, read_verbal_command
+from cmd_functions import cloud_server_version_retrieve
 
 """
 AVA's primary commands file
@@ -90,10 +91,17 @@ def check_internet_connectivity():
 
 def questions(question=None):
     """
-    docstring
+    AVA's main questions function
     """
+    # Answer Arrays
+    yes_answers = {"yes", "yeah", "yep", "yup", "okay", "ok"}
+
+    # Variables
     question = question.lower()
-    if question in {"ava add trigger", "hey add trigger", "eva add trigger"}:
+    ava_version = "1.0.0"
+
+    # Questions
+    if question in {"ava add trigger", "hey add trigger", "eva add trigger"}: # Verbal Programmer
         speak("Okay. What is the trigger phrase?")
         t_phrase = take_valid_input_in()
         # speak(t_phrase)
@@ -102,7 +110,7 @@ def questions(question=None):
         # speak(orig_cmd)
         speak("The new trigger command is: " + t_phrase + ", for the command " + orig_cmd + ". Is this correct?")
         answer = take_valid_input_in()
-        if answer.lower() in {"yes", "yeah", "yep", "yup", "okay", "ok"}:
+        if answer.lower() in yes_answers:
             speak("Writing to persistent database")
             try:
                 write_verbal_command(t_phrase, orig_cmd)
@@ -114,4 +122,6 @@ def questions(question=None):
         else:
             speak("Cancelling operation")
             return False
+    elif question == "ava what is your version" or read_verbal_command(question):
+        speak("My version is " + ava_version + ". My cloud server is version " + cloud_server_version_retrieve())
     print(question)
