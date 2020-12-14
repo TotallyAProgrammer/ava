@@ -1,7 +1,7 @@
 import configparser
 import speech_recognition as sr
 from v_programmer import write_verbal_command, read_verbal_command
-from cmd_functions import cloud_server_version_retrieve
+from cmd_functions import cloud_server_version_retrieve, increment_ava_version
 
 """
 AVA's primary commands file
@@ -122,6 +122,13 @@ def questions(question=None):
         else:
             speak("Cancelling operation")
             return False
-    elif question == "ava what is your version" or read_verbal_command(question):
+    elif question == "ava what is your version" or read_verbal_command(question) == "ava what is your version":
         speak("My version is " + ava_version + ". My cloud server is version " + cloud_server_version_retrieve())
+    elif question == "ava exit" or read_verbal_command(question) == "ava exit":
+        speak("Okay, exitting...")
+        exit()
+    elif question == "ava update version" or read_verbal_command(question) == "ava update version":
+        speak("Incrementing my version.")
+        increment_ava_version()
+        speak("Done.")
     print(question)

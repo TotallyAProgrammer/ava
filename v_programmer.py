@@ -4,7 +4,7 @@ The verbal programmer module for AVA
 
 import json
 
-# TODO Faster lookup. Maybe use a table of IDs? Distribute 
+# TODO Faster lookup. Maybe use a table of IDs? Distribute
 
 def write_verbal_command(t_phrase, orig_cmd): # Test, async should make this faster (AVA shouldnt have to wait for file write operations)
     """
