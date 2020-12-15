@@ -1,4 +1,5 @@
 import configparser
+import sys
 import speech_recognition as sr
 from v_programmer import write_verbal_command, read_verbal_command
 from cmd_functions import cloud_server_version_retrieve, increment_ava_version
@@ -126,7 +127,7 @@ def questions(question=None):
         speak("My version is " + ava_version + ". My cloud server is version " + cloud_server_version_retrieve())
     elif question == "ava exit" or read_verbal_command(question) == "ava exit":
         speak("Okay, exitting...")
-        exit()
+        sys.exit()
     elif question == "ava update version" or read_verbal_command(question) == "ava update version":
         speak("Incrementing my version.")
         increment_ava_version()
