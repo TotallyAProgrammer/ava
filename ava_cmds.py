@@ -98,7 +98,7 @@ def questions(question=None):
 
     # Variables
     question = question.lower()
-    ava_version = "1.0.0"
+    ava_version = "1"
 
     # Questions
     if question in {"ava add trigger", "hey add trigger", "eva add trigger"}: # Verbal Programmer
