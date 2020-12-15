@@ -20,3 +20,6 @@ def increment_ava_version():
     with open('ava_version', 'a') as output:
         version = version + 1
         output.write(str(version))
+
+async def cloud_sync():
+    print("syncing")
