@@ -21,5 +21,8 @@ def increment_ava_version():
         version = version + 1
         output.write(str(version))
 
-async def cloud_sync():
-    print("syncing")
+def cloud_sync():
+    import time
+    while True:
+        print("syncing")
+        time.sleep(60)

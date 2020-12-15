@@ -1,3 +1,4 @@
+import threading
 from ava_cmds import speak, questions, take_user_voice_in
 
 def voice_commands():
@@ -16,4 +17,6 @@ def voice_commands():
 
 if __name__ == '__main__':
     # Run voice_commands
+    cloud = threading.Thread(target=cloud_sync, args=(), daemon=True)
+    cloud.start()
     voice_commands()
