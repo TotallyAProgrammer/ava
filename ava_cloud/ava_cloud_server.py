@@ -14,7 +14,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
     s.bind((BIND_ADDR, BIND_PORT))
 except socket.error as exp:
-    print("Binding failed. Error: " + str(msg[0]) + " Message " + msg[1])
+    print("Binding failed. Error: " + str(exp[0]) + " Message " + exp[1])
     sys.exit()
 
 s.listen(10)
@@ -33,17 +33,20 @@ def send_data(data, conn):
     except:
         return False
 
-def rx_client_data(con):
+def rx_client_data(conn):
     data = conn.recv(1024)
     data = data.decode().lower().replace("\n", "")
     return data
 
-def client_connection(client):
+def client_connection(client, client_addr):
     """
     Give clients a thread and a place to operate.
     """
 
     send_data("AVA Cloud ready.", client)
+    while True:
+        recv = rx_client_data(client)
+        send_data(recv, client)
 
 
 while True:
