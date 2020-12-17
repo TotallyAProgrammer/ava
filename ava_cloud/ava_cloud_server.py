@@ -1,8 +1,9 @@
 import sys
 import socket
 import threading
+from ava_cloud_cmds import ser_ver, parse_questions
 
-server_version = 1
+server_version = ser_ver()
 
 # Server binding
 
@@ -46,7 +47,9 @@ def client_connection(client, client_addr):
     send_data("AVA Cloud ready.", client)
     while True:
         recv = rx_client_data(client)
-        send_data(recv, client)
+        #send_data(recv, client)
+        send_data(parse_questions(recv), client)
+
 
 
 while True:
