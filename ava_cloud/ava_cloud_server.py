@@ -15,7 +15,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
     s.bind((BIND_ADDR, BIND_PORT))
 except socket.error as exp:
-    print("Binding failed. Error: " + str(exp[0]) + " Message " + exp[1])
+    print("Binding failed. Error: " + str(exp))
     sys.exit()
 
 s.listen(10)
@@ -26,11 +26,15 @@ print("Socket bound and server listening.")
 
 def send_data(data, conn):
     """
-    Simplify sending information to client
+    Simplify sending information to client or disconnect the client if requested
     """
     try:
-        conn.send((data +"\n").encode())
-        return True
+        if data == "!!!DISCONNECT_CLIENT!!!":
+            conn.close()
+            
+        else:
+            conn.send((data +"\n").encode())
+            return True
     except:
         return False
 
