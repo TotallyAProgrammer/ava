@@ -1,0 +1,6 @@
+[AVA_CLOUD]
+ser_ver_reporting_location = file
+server_version = 5
+bind_addr = 0.0.0.0
+bind_port = 25680
+hostname = auto

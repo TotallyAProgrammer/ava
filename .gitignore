@@ -12,6 +12,7 @@ __pycache__
 # created by Zane for his dev env
 .vscode
 ava-config.conf
+ava-cloud-config.conf
 scraps/
 # Files that house data will be published seperatly
 # c_v_cmds_db.json
