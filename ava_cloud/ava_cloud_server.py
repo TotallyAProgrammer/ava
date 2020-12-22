@@ -30,12 +30,15 @@ def send_data(data, conn):
     """
     try:
         if data == "!!!DISCONNECT_CLIENT!!!":
-            conn.close()
-            
+            return data
         else:
-            conn.send((data +"\n").encode())
-            return True
-    except:
+            if data is not None:
+                conn.send((data +"\n").encode())
+                return True
+            else:
+                return True
+    except Exception as exp:
+        print("Message sending failed. Error: " + str(exp))
         return False
 
 def rx_client_data(conn):
@@ -52,7 +55,13 @@ def client_connection(client, client_addr):
     while True:
         recv = rx_client_data(client)
         #send_data(recv, client)
-        send_data(parse_questions(recv), client)
+        msg_state = send_data(parse_questions(recv), client)
+        if msg_state == "!!!DISCONNECT_CLIENT!!!":
+            client.close()
+            print("Client " + client_addr[0] + ":" + str(client_addr[1]) + " Disconnected!")
+            break
+        elif msg_state == False:
+            print("Something went wrong... Possible issue with client thread!")
 
 
 
@@ -60,7 +69,7 @@ while True:
     try:
         connection, client_addr = s.accept()
         print("Connected with " + client_addr[0] + ":" + str(client_addr[1]))
-        client = threading.Thread(target=client_connection, args=(connection, client_addr[0]), daemon=True)
+        client = threading.Thread(target=client_connection, args=(connection, client_addr), daemon=True)
         client.start()
     except KeyboardInterrupt:
         print("KeyboardInterrupt detected, stopping service...")
