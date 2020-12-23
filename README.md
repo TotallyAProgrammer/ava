@@ -1,6 +1,6 @@
 # Ava
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FTotallyAProgrammer%2Fava.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FTotallyAProgrammer%2Fava?ref=badge_shield)
 
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FTotallyAProgrammer%2Fava.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FTotallyAProgrammer%2Fava?ref=badge_shield)
 
 ## An adVanced Assistant
 
@@ -46,6 +46,6 @@ In order to use eSpeak-NG as your TTS engine, you may have to build from source,
   - python3x-devel (Where x is your version)
 - Currently AVA doesn't run on well on linux due to pyttsx3 2.90 and prior not having espeak-ng support built in (This is fixed with PR #163)
 
-
 ## License
+
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FTotallyAProgrammer%2Fava.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FTotallyAProgrammer%2Fava?ref=badge_large)
