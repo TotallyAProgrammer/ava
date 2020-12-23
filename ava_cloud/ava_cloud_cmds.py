@@ -34,12 +34,11 @@ def ser_ver():
         print("Error in ser_ver function: " + str(err))
         return "0"
 
-
-def parse_questions(question):
+def cmd_help(question):
     """
-    Parse and handle requests and questions
+    The function to output help data when requested
     """
-    q_arr = {"ava cloud"}
+    question_arr = question.split()
     q_dict = {
         "ava": {
             "cloud": {
@@ -48,16 +47,30 @@ def parse_questions(question):
                 "host": "Retrieve the AVA Cloud host\'s name."
             },
             "local": {
-                "help": "AVA Local specific commands."
+                "help": "AVA Local specific commands.",
+                "speak": "Tell\'s AVA to speak what is passed."
             }
         }
     }
+    try:
+        #print(question_arr[0])
+        return (q_dict.get(str(question_arr[0])).get(str(question_arr[1])).get(str(question_arr[2])))
+    except Exception as exp:
+        print(str(exp))
+        return None
+
+
+def parse_questions(question):
+    """
+    Parse and handle requests and questions
+    """
+    
     question = str(question).lower()
     if question == "ava cloud version":
         return ser_ver()
     elif question == "ava cloud host":
         return "foobar"
-    elif question == "help":
-        return str(q_dict)
+    elif "help" in question.split():
+        return 
     elif question in {"exit", "quit", "disconnect", "dc"}:
         return "!!!DISCONNECT_CLIENT!!!"
