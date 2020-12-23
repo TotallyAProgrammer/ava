@@ -49,15 +49,34 @@ def cmd_help(question):
             "local": {
                 "help": "AVA Local specific commands.",
                 "speak": "Tell\'s AVA to speak what is passed."
-            }
+            },
+            "help": "AVA's command base."
         }
     }
+    def ret(val):
+        if val is not None or "":
+            return val
+        else:
+            return "No help available."
     try:
-        #print(question_arr[0])
-        return (q_dict.get(str(question_arr[0])).get(str(question_arr[1])).get(str(question_arr[2])))
+        if len(question_arr) == 4:
+            #print(len(question_arr))
+            val = ( q_dict.get(str(question_arr[1])).get(str(question_arr[2])).get(str(question_arr[3])) )
+            return ret(val)
+        elif len(question_arr) == 3:
+            val = ( q_dict.get(str(question_arr[1])).get(str(question_arr[2])).get("help") )
+            return ret(val)
+        elif len(question_arr) == 2:
+            val = ( q_dict.get(str(question_arr[1])).get("help") )
+            return ret(val)
+        elif len(question_arr) > 4:
+            return "No help available."
+        elif question_arr == "help".split():
+            return "AVA Cloud help command."
+
     except Exception as exp:
-        print(str(exp))
-        return None
+        #print(str(exp))
+        return "No help available."
 
 
 def parse_questions(question):
@@ -71,6 +90,6 @@ def parse_questions(question):
     elif question == "ava cloud host":
         return "foobar"
     elif "help" in question.split():
-        return 
+        return cmd_help(question)
     elif question in {"exit", "quit", "disconnect", "dc"}:
         return "!!!DISCONNECT_CLIENT!!!"
