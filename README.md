@@ -14,6 +14,11 @@ Due to AVA being ever-evolving it is _highly_ reccomended that you work in a pyt
 AVA has been tested to function with Python 3.6.8 and above, it is strongly reccomended to work with the latest python version regardless.
 AVA has only been tested to function with the versions of the used libraries listed in the requirements.txt, but it should work in newer versions of them too.
 
+### TODO
+
+- AVA Thin client
+  - AVA Local would send all data to AVA Cloud for proccessin to decrease the footprint of AVA (Hence the name "Thin client")
+
 ### Requirements
 
 AVA Relies on the following versions (or higher) for full functionality:
