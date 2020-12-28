@@ -21,6 +21,20 @@ def increment_ava_version():
         version = version + 1
         output.write(str(version))
 
+def is_ip_valid(ip):
+    from ipaddress import ip_address
+    try:
+        ip_address(ip)
+        return True
+    except Exception as exp:
+        return False
+        
+def is_port_valid(port):
+    if 0 < int(port) and int(port) < 65536:
+        return True
+    else:
+        return False
+
 def cloud_sync():
     import time
     while True:
