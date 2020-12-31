@@ -3,7 +3,7 @@ import sys
 import speech_recognition as sr
 from v_programmer import write_verbal_command, read_verbal_command
 from cmd_functions import cloud_server_version_retrieve, increment_ava_version
-from ava_connect_clouds import connect_ava_cloud
+from ava_connect_clouds import connect_ava_cloud, send_to_cloud
 
 """
 AVA's primary commands file
@@ -99,6 +99,12 @@ def cloud_questions(socket, question=None):
     """
     question = str(question).lower()
     s = socket
+    if question == "ava cloud version" or read_verbal_command(question) == "ava cloud version":
+        return send_to_cloud(socket, "ava cloud version")
+    elif question == "ava cloud help" or read_verbal_command(question) == "ava cloud help":
+        return send_to_cloud(socket, "ava cloud help")
+
+
 
 def questions(question=None):
     """

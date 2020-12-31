@@ -5,6 +5,19 @@ from cmd_functions import is_ip_valid, is_port_valid
 A library that allows AVA to connect to various cloud services
 '''
 
+def send_to_cloud(socket, data):
+    """
+    Send data over the specified socket to the associated cloud
+    socket = any socket object
+    data = a string or int to be sent over the specified socket
+    """
+    try:
+        data = data.encode()
+        socket.send((str(data) +"\n").encode())
+        return True
+    except Expection as exp:
+        print("Exception: " + str(exp))
+        return False
 
 def connect_ava_cloud(ip, port=25680):
     """

@@ -39,6 +39,9 @@ def cmd_help(question):
     The function to output help data when requested
     """
     question_arr = question.split()
+    del question_arr[0]
+    del question_arr[0]
+    print(question_arr)
     q_dict = {
         "ava": {
             "cloud": {
