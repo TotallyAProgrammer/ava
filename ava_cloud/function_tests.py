@@ -1,3 +1,3 @@
 from ava_cloud_cmds import *
 
-print(cmd_help("help ava local help"))
+print(update_version(commitCount("TotallyAProgrammer", "ava")))

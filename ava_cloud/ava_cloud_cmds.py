@@ -1,4 +1,6 @@
 import configparser
+import re
+import requests
 """
 AVA Cloud 'top-level' commands
 """
@@ -16,6 +18,19 @@ def read_socket_info(info="ip"):
         return int(config.get('AVA_CLOUD', 'bind_port'))
     elif str(info).lower() == "ip":
         return str(config.get('AVA_CLOUD', 'bind_addr'))
+
+def commitCount(uname, repo):
+	return re.search('\d+$', requests.get('https://api.github.com/repos/{}/{}/commits?per_page=1'.format(uname, repo)).links['last']['url']).group()
+
+def update_version(new_version):
+    try:
+        with open("./server_version", "w") as f:
+            f.write(str(new_version))
+            f.close
+            return True
+    except Exception as exp:
+        print("Error updating version: " + str(exp))
+        return False
 
 def ser_ver():
     """
