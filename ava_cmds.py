@@ -14,6 +14,8 @@ Located here are all of AVA's core commands
 config = configparser.ConfigParser()
 config.readfp(open(r'ava-config.conf'))
 
+# Variables
+cloud_mode = False
 
 def take_user_voice_in():
     """
@@ -91,6 +93,9 @@ def check_internet_connectivity():
     except requests.ConnectionError:
         return False
 
+def q_proc(question=None, ava_cmd=None):
+    return question == ava_cmd or read_verbal_command(question) == ava_cmd
+
 def cloud_questions(socket, question=None):
     """
     Handle questions for cloud services
@@ -99,9 +104,9 @@ def cloud_questions(socket, question=None):
     """
     question = str(question).lower()
     s = socket
-    if question == "ava cloud version" or read_verbal_command(question) == "ava cloud version":
+    if q_proc(question, "ava cloud version"):
         return send_to_cloud(socket, "ava cloud version")
-    elif question == "ava cloud help" or read_verbal_command(question) == "ava cloud help":
+    elif q_proc(question, "ava cloud help"):
         return send_to_cloud(socket, "ava cloud help")
 
 
@@ -117,6 +122,7 @@ def questions(question=None):
     # Variables
     question = question.lower()
     ava_version = "130"
+    global cloud_mode
 
     # Questions
     if cloud_mode != True:
@@ -141,31 +147,34 @@ def questions(question=None):
             else:
                 speak("Cancelling operation")
                 return False
-        elif question == "ava what is your version" or read_verbal_command(question) == "ava what is your version":
+        elif q_proc(question, "ava what is your version"):
             speak("My version is " + ava_version + ". My cloud server is version " + cloud_server_version_retrieve())
-        elif question == "ava exit" or read_verbal_command(question) == "ava exit":
+        elif q_proc(question, "ava exit"):
             speak("Okay, exitting...")
             sys.exit()
-        elif question == "ava update version" or read_verbal_command(question) == "ava update version":
+        elif q_proc(question, "ava update version"):
             speak("Incrementing my version.")
             increment_ava_version()
             speak("Done.")
-        elif question == "ava cloud enable" or read_verbal_command(question) == "ava cloud enable":
+        elif q_proc(question, "ava cloud enable"):
             speak("Switching to cloud mode...")
-            global cloud_mode = True
-        elif question == "ava is cloud mode enabled" or read_verbal_command(question) == "ava is cloud mode enabled":
+            # global cloud_mode
+            cloud_mode = True
+        elif q_proc(question, "ava is cloud mode enabled"):
             speak("AVA Cloud mode is enabled.")
         print(question)
     elif cloud_mode == True:
-        if question == "ava is cloud mode enabled" or read_verbal_command(question) == "ava is cloud mode enabled":
+        if q_proc(question, "ava is cloud mode enabled"):
             speak("AVA Cloud mode is enabled.")
-        elif question == "ava exit cloud mode" or read_verbal_command(question) == "ava exit cloud mode":
+        elif q_proc(question, "ava exit cloud mode"):
             speak("Exiting cloud mode")
-            global cloud_mode == False
-        elif question == "ava connect to ava cloud" or read_verbal_command(quesiton) == "ava connect to ava cloud":
+            # global cloud_mode
+            cloud_mode = False
+        elif q_proc(question, "ava connect to ava cloud"):
             speak("Attempting to connect to AVA Cloud...")
             try:
-                global ava_c_socket = connect_ava_cloud(str(config.get('AVA_CLOUD', 'ip')), str(config.get('AVA_CLOUD', 'port')))
+                global ava_c_socket
+                ava_c_socket = connect_ava_cloud(str(config.get('AVA_CLOUD', 'ip')), str(config.get('AVA_CLOUD', 'port')))
                 ava_cloud_connect = True
             except Exception as exp:
                 speak("An error occured, would you like me to read it to you?")
