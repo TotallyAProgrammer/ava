@@ -16,6 +16,7 @@ config.readfp(open(r'ava-config.conf'))
 
 # Variables
 cloud_mode = False
+inet_force_state = bool(config.get('MISC', 'force_offline'))
 
 def take_user_voice_in():
     """
@@ -86,12 +87,15 @@ def check_internet_connectivity():
     Check if you're connected to the internet
     Returns True if connected, False if anything else
     """
-    import requests
-    try:
-        requests.get("http://google.com")
-        return True
-    except requests.ConnectionError:
+    if inet_force_state == True:
         return False
+    else:
+        import requests
+        try:
+            requests.get("http://google.com")
+            return True
+        except requests.ConnectionError:
+            return False
 
 def q_proc(question=None, ava_cmd=None):
     return question == ava_cmd or read_verbal_command(question) == ava_cmd
@@ -173,9 +177,12 @@ def questions(question=None):
         elif q_proc(question, "ava connect to ava cloud"):
             speak("Attempting to connect to AVA Cloud...")
             try:
-                global ava_c_socket
-                ava_c_socket = connect_ava_cloud(str(config.get('AVA_CLOUD', 'ip')), str(config.get('AVA_CLOUD', 'port')))
-                ava_cloud_connect = True
+                if check_internet_connectivity == True:
+                    global ava_c_socket
+                    ava_c_socket = connect_ava_cloud(str(config.get('AVA_CLOUD', 'ip')), str(config.get('AVA_CLOUD', 'port')))
+                    ava_cloud_connect = True
+                else:
+                    raise "Offline mode is enable in the configuration file."
             except Exception as exp:
                 speak("An error occured, would you like me to read it to you?")
                 while True:

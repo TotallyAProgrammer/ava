@@ -4,3 +4,5 @@ key = WIT.AI KEY HERE
 enabled = false
 ip = 127.0.0.1
 port = 25680
+[MISC]
+force_offline = false
