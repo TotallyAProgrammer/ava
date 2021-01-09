@@ -15,8 +15,10 @@ def voice_commands():
             questions(query)
             #speak(query)
 
-if __name__ == '__main__':
-    # Run voice_commands
-    cloud = threading.Thread(target=cloud_sync, args=(), daemon=True)
-    cloud.start()
+def run_ava():
+    #cloud = threading.Thread(target=cloud_sync, args=(), daemon=True)
+    #cloud.start()
     voice_commands()
+
+if __name__ == '__main__':
+    run_ava()
