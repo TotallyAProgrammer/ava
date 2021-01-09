@@ -20,7 +20,7 @@ def read_socket_info(info="ip"):
         return str(config.get('AVA_CLOUD', 'bind_addr'))
 
 def commitCount(uname, repo):
-	return re.search('\d+$', requests.get('https://api.github.com/repos/{}/{}/commits?per_page=1'.format(uname, repo)).links['last']['url']).group()
+    return re.search('\d+$', requests.get('https://api.github.com/repos/{}/{}/commits?per_page=1'.format(uname, repo)).links['last']['url']).group()
 
 def update_version(new_version):
     try:
@@ -93,7 +93,7 @@ def cmd_help(question):
             return "AVA Cloud help command."
 
     except Exception as exp:
-        #print(str(exp))
+        print(str(exp))
         return "No help available."
 
 
