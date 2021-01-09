@@ -27,6 +27,7 @@ def is_ip_valid(ip):
         ip_address(ip)
         return True
     except Exception as exp:
+        print("Exception occoured: " + str(exp))
         return False
         
 def is_port_valid(port):

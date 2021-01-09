@@ -15,7 +15,7 @@ def send_to_cloud(socket, data):
         data = data.encode()
         socket.send((str(data) +"\n").encode())
         return True
-    except Expection as exp:
+    except Exception as exp:
         print("Exception: " + str(exp))
         return False
 
