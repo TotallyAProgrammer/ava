@@ -11,8 +11,13 @@ Located here are all of AVA's core commands
 """
 
 # Read AVA's Configuration
-config = configparser.ConfigParser()
-config.readfp(open(r'ava-config.conf'))
+try:
+    config = configparser.ConfigParser()
+    #config.readfp(open(r'C:\Users\foo\Documents\GitHub\ava\ava_app\src\ava_app\ava-config.conf'))
+    config.read_file(open(r'C:\Users\foo\Documents\GitHub\ava\ava_app\src\ava_app\ava-config.conf'))
+except Exception as exp:
+    print(str(exp))
+    sys.exit()
 
 # Variables
 cloud_mode = False
