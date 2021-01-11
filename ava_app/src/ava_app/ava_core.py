@@ -1,5 +1,5 @@
 import threading
-from ava_cmds import speak, questions, take_user_voice_in
+from .ava_cmds import speak, questions, take_user_voice_in
 
 def voice_commands():
     """

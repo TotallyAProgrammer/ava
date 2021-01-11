@@ -1,9 +1,9 @@
 import configparser
 import sys
 import speech_recognition as sr
-from v_programmer import write_verbal_command, read_verbal_command
-from cmd_functions import cloud_server_version_retrieve, increment_ava_version
-from ava_connect_clouds import connect_ava_cloud, send_to_cloud
+from .v_programmer import write_verbal_command, read_verbal_command
+from .cmd_functions import cloud_server_version_retrieve, increment_ava_version
+from .ava_connect_clouds import connect_ava_cloud, send_to_cloud
 
 """
 AVA's primary commands file
@@ -13,7 +13,6 @@ Located here are all of AVA's core commands
 # Read AVA's Configuration
 try:
     config = configparser.ConfigParser()
-    #config.readfp(open(r'C:\Users\foo\Documents\GitHub\ava\ava_app\src\ava_app\ava-config.conf'))
     config.read_file(open(r'C:\Users\foo\Documents\GitHub\ava\ava_app\src\ava_app\ava-config.conf'))
 except Exception as exp:
     print(str(exp))

@@ -1,5 +1,5 @@
 import socket
-from cmd_functions import is_ip_valid, is_port_valid
+from .cmd_functions import is_ip_valid, is_port_valid
 
 '''
 A library that allows AVA to connect to various cloud services
