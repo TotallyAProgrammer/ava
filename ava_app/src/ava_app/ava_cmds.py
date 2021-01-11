@@ -20,7 +20,10 @@ except Exception as exp:
 
 # Variables
 cloud_mode = False
-inet_force_state = bool(config.get('MISC', 'force_offline'))
+if config.get('MISC', 'force_offline').lower() == "true":
+    inet_force_state = True
+else:
+    inet_force_state = False
 
 def take_user_voice_in():
     """
@@ -92,6 +95,7 @@ def check_internet_connectivity():
     Returns True if connected, False if anything else
     """
     if inet_force_state == True:
+        print("Offline mode is enabled")
         return False
     else:
         import requests
