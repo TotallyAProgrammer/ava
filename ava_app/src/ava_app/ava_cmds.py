@@ -1,10 +1,9 @@
 import configparser
 import sys
 import speech_recognition as sr
-from v_programmer import write_verbal_command, read_verbal_command
-from cmd_functions import cloud_server_version_retrieve, increment_ava_version
-from ava_connect_clouds import connect_ava_cloud, send_to_cloud
-from ext_commands import external_questions
+from .v_programmer import write_verbal_command, read_verbal_command
+from .cmd_functions import cloud_server_version_retrieve, increment_ava_version
+from .ava_connect_clouds import connect_ava_cloud, send_to_cloud
 
 """
 AVA's primary commands file
@@ -21,7 +20,10 @@ except Exception as exp:
 
 # Variables
 cloud_mode = False
-inet_force_state = bool(config.get('MISC', 'force_offline'))
+if config.get('MISC', 'force_offline').lower() == "true":
+    inet_force_state = True
+else:
+    inet_force_state = False
 
 def take_user_voice_in():
     """
@@ -92,8 +94,8 @@ def check_internet_connectivity():
     Check if you're connected to the internet
     Returns True if connected, False if anything else
     """
-    global inet_force_state
     if inet_force_state == True:
+        print("Offline mode is enabled")
         return False
     else:
         import requests
@@ -113,7 +115,7 @@ def cloud_questions(socket, question=None):
     question = the users question
     """
     question = str(question).lower()
-    # s = socket
+    s = socket
     if q_proc(question, "ava cloud version"):
         return send_to_cloud(socket, "ava cloud version")
     elif q_proc(question, "ava cloud help"):
@@ -172,11 +174,6 @@ def questions(question=None):
             cloud_mode = True
         elif q_proc(question, "ava is cloud mode enabled"):
             speak("AVA Cloud mode is enabled.")
-        else:
-            try:
-                external_questions(question)
-            except Exception as exp:
-                print("Exception: " + str(exp))
         print(question)
     elif cloud_mode == True:
         if q_proc(question, "ava is cloud mode enabled"):
@@ -191,7 +188,7 @@ def questions(question=None):
                 if check_internet_connectivity == True:
                     global ava_c_socket
                     ava_c_socket = connect_ava_cloud(str(config.get('AVA_CLOUD', 'ip')), str(config.get('AVA_CLOUD', 'port')))
-                    # ava_cloud_connect = True
+                    ava_cloud_connect = True
                 else:
                     raise "Offline mode is enable in the configuration file."
             except Exception as exp:

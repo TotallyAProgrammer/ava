@@ -17,4 +17,8 @@ scraps/
 # Files that house data will be published seperatly
 # c_v_cmds_db.json
 /Include
+<<<<<<< HEAD
 *.code-workspace
+=======
+/ava_app/src/ava_app.dist-info
+>>>>>>> d861e168226be57179c9bacecb0f5c755d26066c
